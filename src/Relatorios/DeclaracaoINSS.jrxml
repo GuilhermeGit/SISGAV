@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DeclaracaoINSS" language="groovy" pageWidth="555" pageHeight="802" columnWidth="535" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="a0ff0704-23ac-464d-9135-626a3cf436e0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[SELECT
+     funcionario.`id` AS funcionario_id,
+     funcionario.`exoneracao` AS funcionario_exoneracao,
+     funcionario.`nome` AS funcionario_nome,
+     funcionario.`secretaria` AS funcionario_secretaria,
+     funcionario.`Funcao` AS funcionario_Funcao,
+     funcionario.`admissao` AS funcionario_admissao
+FROM
+     `funcionario` funcionario where funcionario.id = '?';]]>
+	</queryString>
+	<field name="funcionario_id" class="java.lang.Integer"/>
+	<field name="funcionario_exoneracao" class="java.lang.String"/>
+	<field name="funcionario_nome" class="java.lang.String"/>
+	<field name="funcionario_secretaria" class="java.lang.String"/>
+	<field name="funcionario_Funcao" class="java.lang.String"/>
+	<field name="funcionario_admissao" class="java.lang.String"/>
+	<group name="funcionario_nome">
+		<groupExpression><![CDATA[$F{funcionario_nome}]]></groupExpression>
+		<groupHeader>
+			<band height="319">
+				<elementGroup/>
+				<staticText>
+					<reportElement x="219" y="0" width="100" height="20" uuid="0099d5fc-2156-48df-8894-7d2245017054"/>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DECLARAÇÃO]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="2" y="34" width="555" height="285" uuid="3cf2eedd-04c1-4847-b6f0-21122b576e60"/>
+					<textElement>
+						<font fontName="Arial" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Declaramos para fazer prova junto ao Instituto Nacional do Seguro Social - INSS, que, a Sr(a)"  +  $F{funcionario_nome} + " foi funcionária desta Prefeitura Municipal de Lavras da Mangabeira-CE nos períodos de " + $F{funcionario_admissao} + " à " + $F{funcionario_exoneracao} + " onde a mesma exerceu a função de "+$F{funcionario_Funcao} +  " junto a Secretaria de "+ $F{funcionario_secretaria} + " deste município de Lavras da Mangabeira-CE." +
+"Declaramos ainda, que, a mesma foi regida pela Consolidação das Leis Trabalhistas – CLT, desde sua admissão até 27.02.1992 e a partir de 28.02.1992, passou a ser regida pelo Regime Jurídico Único – RJU (estatutário) conforme a lei n° 005/92 de 28.02.1992 e publicada no Diário Oficial em 16.09.1992, permanecendo desta forma até sua exoneração." + " Declaramos finalmente, que, este Município nunca possuiu e nem possui regime próprio de previdência, estando assim subordinado ao Regime Geral da Previdência Social – RGPS. Pelo que firmamos a presente declaração para fins necessários."]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="114"/>
+		</groupFooter>
+	</group>
+	<group name="funcionario_admissao">
+		<groupExpression><![CDATA[$F{funcionario_admissao}]]></groupExpression>
+		<groupHeader>
+			<band height="183"/>
+		</groupHeader>
+	</group>
+	<group name="funcionario_exoneracao">
+		<groupExpression><![CDATA[$F{funcionario_exoneracao}]]></groupExpression>
+	</group>
+	<group name="funcionario_Funcao">
+		<groupExpression><![CDATA[$F{funcionario_Funcao}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="114" splitType="Stretch">
+			<image>
+				<reportElement x="233" y="10" width="98" height="89" uuid="a6114164-c5be-4ff5-8488-b7d83c7ba498"/>
+				<imageExpression><![CDATA["C:\\Users\\Guilherme\\Desktop\\novo brasão lavras da mangabeira.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="78" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="6e3c638b-58eb-44ec-abdf-0ba594e7e3e0"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="4" y="0" width="553" height="78" uuid="d0a27225-b690-4007-a9f2-d9ea4d88a02d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE LAVRAS DA MANGABEIRA–CE
+SECRETARIA DE ADMINISTRAÇÃO
+CNPJ: 07.609.621/0001-16
+ ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="134" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="7682f5da-a350-4a8c-9cfc-3b615648d963"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
