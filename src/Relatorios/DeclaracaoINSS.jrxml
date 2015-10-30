@@ -22,7 +22,7 @@
      funcionario.`Funcao` AS funcionario_Funcao,
      funcionario.`admissao` AS funcionario_admissao
 FROM
-     `funcionario` funcionario where funcionario.id = '?';]]>
+     funcionario where id = 10;]]>
 	</queryString>
 	<field name="funcionario_id" class="java.lang.Integer"/>
 	<field name="funcionario_exoneracao" class="java.lang.String"/>
@@ -36,14 +36,14 @@ FROM
 			<band height="319">
 				<elementGroup/>
 				<staticText>
-					<reportElement x="219" y="0" width="100" height="20" uuid="0099d5fc-2156-48df-8894-7d2245017054"/>
+					<reportElement uuid="0099d5fc-2156-48df-8894-7d2245017054" x="219" y="0" width="100" height="20"/>
 					<textElement textAlignment="Center">
 						<font fontName="Arial" size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[DECLARAÇÃO]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="2" y="34" width="555" height="285" uuid="3cf2eedd-04c1-4847-b6f0-21122b576e60"/>
+					<reportElement uuid="3cf2eedd-04c1-4847-b6f0-21122b576e60" x="2" y="34" width="555" height="285"/>
 					<textElement>
 						<font fontName="Arial" size="12"/>
 					</textElement>
@@ -74,7 +74,7 @@ FROM
 	<title>
 		<band height="114" splitType="Stretch">
 			<image>
-				<reportElement x="233" y="10" width="98" height="89" uuid="a6114164-c5be-4ff5-8488-b7d83c7ba498"/>
+				<reportElement uuid="a6114164-c5be-4ff5-8488-b7d83c7ba498" x="233" y="10" width="98" height="89"/>
 				<imageExpression><![CDATA["C:\\Users\\Guilherme\\Desktop\\novo brasão lavras da mangabeira.jpg"]]></imageExpression>
 			</image>
 		</band>
@@ -85,13 +85,13 @@ FROM
 	<columnHeader>
 		<band height="78" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="6e3c638b-58eb-44ec-abdf-0ba594e7e3e0"/>
+				<reportElement uuid="6e3c638b-58eb-44ec-abdf-0ba594e7e3e0" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="4" y="0" width="553" height="78" uuid="d0a27225-b690-4007-a9f2-d9ea4d88a02d"/>
+				<reportElement uuid="d0a27225-b690-4007-a9f2-d9ea4d88a02d" x="4" y="0" width="553" height="78"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="14" isBold="true"/>
 				</textElement>
@@ -105,7 +105,7 @@ CNPJ: 07.609.621/0001-16
 	<columnFooter>
 		<band height="134" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="7682f5da-a350-4a8c-9cfc-3b615648d963"/>
+				<reportElement uuid="7682f5da-a350-4a8c-9cfc-3b615648d963" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>

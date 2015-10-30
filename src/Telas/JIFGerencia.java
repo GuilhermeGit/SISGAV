@@ -835,7 +835,7 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
     private void btdeclaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdeclaActionPerformed
      try {
             chamar teste = new chamar();
-            JasperViewer.viewReport(teste.exibirRelatorio(0));
+            JasperViewer.viewReport(teste.exibirRelatorio(0), false);
             
             
         } catch (SQLException ex) {

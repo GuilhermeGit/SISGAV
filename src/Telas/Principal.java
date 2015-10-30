@@ -43,6 +43,9 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jdpPrincipal = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -56,16 +59,21 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmFuncionarios = new javax.swing.JMenu();
         jmiGF = new javax.swing.JMenuItem();
-        jmRelatorio = new javax.swing.JMenu();
-        jmiGR = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jmFerramentas = new javax.swing.JMenu();
         jmiConfig = new javax.swing.JMenuItem();
         jmiBackUp = new javax.swing.JMenuItem();
         jmiRestaurar = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
+
+        jMenu1.setText("File");
+        jMenuBar2.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar2.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISGAV - Sistema Gerenciador de Arquivo");
@@ -195,7 +203,7 @@ public class Principal extends javax.swing.JFrame {
         jdpPrincipalLayout.setVerticalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jdpPrincipalLayout.createSequentialGroup()
-                .addContainerGap(162, Short.MAX_VALUE)
+                .addContainerGap(160, Short.MAX_VALUE)
                 .addGroup(jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jdpPrincipalLayout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,14 +229,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jmFuncionarios);
 
-        jmRelatorio.setText("Relatório Geral");
+        jMenu3.setText("Usuário");
 
-        jmiGR.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.SHIFT_MASK));
-        jmiGR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/relatorio-alunos.png"))); // NOI18N
-        jmiGR.setText("Gerar ");
-        jmRelatorio.add(jmiGR);
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Notes.png"))); // NOI18N
+        jMenuItem4.setText("Alterar Usuário");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem4);
 
-        jMenuBar1.add(jmRelatorio);
+        jMenuBar1.add(jMenu3);
 
         jmFerramentas.setText("Ferramentas");
 
@@ -258,15 +270,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jmFerramentas.add(jmiRestaurar);
-
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Notes.png"))); // NOI18N
-        jMenuItem4.setText("Gerencia de usuário");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jmFerramentas.add(jMenuItem4);
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Exit.png"))); // NOI18N
         jMenuItem1.setText("Sair ");
@@ -323,9 +326,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        AlterarUsu au   = new AlterarUsu();
-        jdpPrincipal.add(au);
-        au.setVisible(true);
+        AlterarUs au = new AlterarUs();
+        au.setVisible(true);         
        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
@@ -446,7 +448,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -455,11 +461,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jdpPrincipal;
     private javax.swing.JMenu jmFerramentas;
     private javax.swing.JMenu jmFuncionarios;
-    private javax.swing.JMenu jmRelatorio;
     private javax.swing.JMenuItem jmiBackUp;
     private javax.swing.JMenuItem jmiConfig;
     private javax.swing.JMenuItem jmiGF;
-    private javax.swing.JMenuItem jmiGR;
     private javax.swing.JMenuItem jmiRestaurar;
     private javax.swing.JPasswordField tf_senha;
     private javax.swing.JTextField tf_usuario;
