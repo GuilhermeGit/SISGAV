@@ -30,6 +30,11 @@ public class Usuario implements Serializable {
     @Column
     private String senha;
     
+    // Valor a ser pego pelo iReport
+    @Column
+    private int PegaID;
+    
+    
     
 
     /**
@@ -80,6 +85,20 @@ public class Usuario implements Serializable {
         } else {
             return "erro";
         }
+    }
+
+    /**
+     * @return the PegaID
+     */
+    public int getPegaID() {
+        return PegaID;
+    }
+
+    /**
+     * @param PegaID the PegaID to set
+     */
+    public void setPegaID(int PegaID) {
+        this.PegaID = PegaID;
     }
 
 }

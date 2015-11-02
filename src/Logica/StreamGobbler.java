@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 
 /**
  *
- * @author michel
+ * @author Guilherme
  */
 
 //http://www.javaworld.com/javaworld/jw-12-2000/jw-1229-traps.html

@@ -5,8 +5,10 @@
  */
 package Telas;
 
+import DAO.UsuarioDAO;
 import DAO.funcionarioDAO;
 import Logica.Funcionario;
+import Logica.Usuario;
 import ModelTable.FuncionarioTableModel;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +21,6 @@ import Relatorios.chamar;
 import java.sql.SQLException;
 import net.sf.jasperreports.view.JasperViewer;
 
-
-
-
-
 /**
  *
  * @author Guilherme
@@ -34,7 +32,7 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
      */
     public JIFGerencia() {
         initComponents();
-        
+
     }
 
     /**
@@ -595,7 +593,7 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
         btExcluir.setEnabled(true);
         btPesquisar.setEnabled(false);
         btAlterar.setEnabled(true);
-        
+
         if (evt.getClickCount() == 2) {
             Object obj = (tbAlterar.getValueAt(tbAlterar.getSelectedRow(), 0));
             Object obj2 = (tbAlterar.getValueAt(tbAlterar.getSelectedRow(), 1));
@@ -615,7 +613,7 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
             Object obj16 = (tbAlterar.getValueAt(tbAlterar.getSelectedRow(), 15));
             Object obj17 = (tbAlterar.getValueAt(tbAlterar.getSelectedRow(), 16));
             Object obj18 = (tbAlterar.getValueAt(tbAlterar.getSelectedRow(), 17));
-            
+
             String Id = obj.toString();
             String Nome = obj2.toString();
             String Telefone = obj3.toString();
@@ -634,7 +632,7 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
             String Prateleira = obj16.toString();
             String Caixa = obj17.toString();
             String Envelope = obj18.toString();
-            
+
             tfId.setText(Id);//aqui pego o valor da linha selecionada na coluna 0 e adiciono ao jtextfield
             tfNome.setText(Nome);
             jFCPF.setText(CPF);
@@ -653,7 +651,7 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
             tfprate.setText(Prateleira);
             tfcaixa.setText(Caixa);
             tfenve.setText(Envelope);
-            
+
         }
 
     }//GEN-LAST:event_tbAlterarMouseClicked
@@ -670,12 +668,12 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
                 jFnascimento.getText(),
                 jFCPF.getText(), tfRG.getText(), jFContato.getText(), jFAdm.getText(), tf_Funcao.getText(), jFexo.getText(), tfprate.getText(), tfcaixa.
                 getText(), tfenve.getText())) {
-            
+
             if (Util.CPF(jFCPF.getText())) {
                 if (u.dataValida(jFnascimento.getText())) {
                     if (u.dataValida(jFAdm.getText())) {
                         if (u.dataValida(jFexo.getText())) {
-                            
+
                             Funcionario fun = new Funcionario();
                             fun.setNome(tfNome.getText());
                             fun.setCpf(jFCPF.getText());
@@ -694,11 +692,11 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
                             fun.setPrateleira(tfprate.getText());
                             fun.setCaixa(tfcaixa.getText());
                             fun.setEnvelope(tfenve.getText());
-                            
+
                             funcionarioDAO dao = new funcionarioDAO();
                             dao.salvar(fun);
                             limpaCampos();
-                            
+
                             JOptionPane.showMessageDialog(rootPane, "Cadastro de Funcionário realizado com Sucesso!");
                             List<Funcionario> funcionarios = dao.pesquisaNomeiLike("");
                             FuncionarioTableModel ftm = new FuncionarioTableModel(funcionarios);
@@ -790,59 +788,69 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
         Fun = fDAO.pesquisaID(Integer.parseInt(tfId.getText()));
         Util u = new Util();
         if (Util.chkVazio(tfNome.getText(), tfCidade.getText(), tf_matri.getText(),
-            jFnascimento.getText(),
-            jFCPF.getText(), tfRG.getText(), jFContato.getText(), tf_Funcao.getText(), jFAdm.getText(), jFexo.getText(), tfprate.getText(), tfcaixa.
-            getText(), tfenve.getText())) {
-        if (u.dataValida(jFnascimento.getText())) {
-            if (u.dataValida(jFAdm.getText())) {
-                if (u.dataValida(jFexo.getText())) {
-                    if (Util.CPF(jFCPF.getText())) {
+                jFnascimento.getText(),
+                jFCPF.getText(), tfRG.getText(), jFContato.getText(), tf_Funcao.getText(), jFAdm.getText(), jFexo.getText(), tfprate.getText(), tfcaixa.
+                getText(), tfenve.getText())) {
+            if (u.dataValida(jFnascimento.getText())) {
+                if (u.dataValida(jFAdm.getText())) {
+                    if (u.dataValida(jFexo.getText())) {
+                        if (Util.CPF(jFCPF.getText())) {
 
-                        Fun.setNome(tfNome.getText());
-                        Fun.setCpf(jFCPF.getText());
-                        Fun.setCidade(tfCidade.getText());
-                        Fun.setMatricula(tf_matri.getText());
-                        Fun.setEstado(valor);
-                        Fun.setNascimento(jFnascimento.getText());
-                        Fun.setRg(tfRG.getText());
-                        Fun.setEndereco(tfend.getText());
-                        Fun.setSexo(valor2);
-                        Fun.setTelefone(jFContato.getText());
-                        Fun.setSecretaria(valor3);
-                        Fun.setAdmissao(jFAdm.getText());
-                        Fun.setExoneracao(jFexo.getText());
-                        Fun.setFuncao(tf_Funcao.getText());
-                        Fun.setPrateleira(tfprate.getText());
-                        Fun.setCaixa(tfcaixa.getText());
-                        Fun.setEnvelope(tfenve.getText());
+                            Fun.setNome(tfNome.getText());
+                            Fun.setCpf(jFCPF.getText());
+                            Fun.setCidade(tfCidade.getText());
+                            Fun.setMatricula(tf_matri.getText());
+                            Fun.setEstado(valor);
+                            Fun.setNascimento(jFnascimento.getText());
+                            Fun.setRg(tfRG.getText());
+                            Fun.setEndereco(tfend.getText());
+                            Fun.setSexo(valor2);
+                            Fun.setTelefone(jFContato.getText());
+                            Fun.setSecretaria(valor3);
+                            Fun.setAdmissao(jFAdm.getText());
+                            Fun.setExoneracao(jFexo.getText());
+                            Fun.setFuncao(tf_Funcao.getText());
+                            Fun.setPrateleira(tfprate.getText());
+                            Fun.setCaixa(tfcaixa.getText());
+                            Fun.setEnvelope(tfenve.getText());
 
-                        fDAO.Alterar(Fun);
+                            fDAO.Alterar(Fun);
 
-                        JOptionPane.showMessageDialog(rootPane, "Alteração de Funcionário realizada com Sucesso!");
+                            JOptionPane.showMessageDialog(rootPane, "Alteração de Funcionário realizada com Sucesso!");
 
-                        limpaCampos();
-                        funcionarioDAO fdao = new funcionarioDAO();
-                        List<Funcionario> funcionarios = fdao.pesquisaNomeiLike("");
-                        FuncionarioTableModel ftm = new FuncionarioTableModel(funcionarios);
-                        tbAlterar.setModel(ftm);
+                            limpaCampos();
+                            funcionarioDAO fdao = new funcionarioDAO();
+                            List<Funcionario> funcionarios = fdao.pesquisaNomeiLike("");
+                            FuncionarioTableModel ftm = new FuncionarioTableModel(funcionarios);
+                            tbAlterar.setModel(ftm);
+                        }
                     }
                 }
             }
         }
-        }
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void btdeclaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdeclaActionPerformed
-     try {
+
+        // Pre ficar entendido
+        // Clia um modelo usuário e atribui os metodos da classe Dao
+        Usuario usu = new UsuarioDAO().recebeUsuario();
+        // Atribui o valor ao modelo
+        usu.setPegaID((int) tbAlterar.getValueAt(tbAlterar.getSelectedRow(), 0));
+        // Instancia a classe Dao
+        UsuarioDAO usuDao = new UsuarioDAO();
+        // Usa o método alterar
+        usuDao.Alterar(usu);
+
+        //Chamar o iReport
+        try {
             chamar teste = new chamar();
             JasperViewer.viewReport(teste.exibirRelatorio(0), false);
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(JIFGerencia.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
-     
+
     }//GEN-LAST:event_btdeclaActionPerformed
 
 
@@ -918,5 +926,5 @@ private void limpaCampos() {
         tfcaixa.setText("");
         tfenve.setText("");
     }
-    
+
 }

@@ -76,6 +76,7 @@ public class Funcionario implements Serializable {
     
     @Column
     private String envelope;
+    
 
     /**
      * @return the id

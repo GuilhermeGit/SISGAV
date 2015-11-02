@@ -62,7 +62,6 @@ public class Principal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jmFerramentas = new javax.swing.JMenu();
-        jmiConfig = new javax.swing.JMenuItem();
         jmiBackUp = new javax.swing.JMenuItem();
         jmiRestaurar = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -244,15 +243,6 @@ public class Principal extends javax.swing.JFrame {
 
         jmFerramentas.setText("Ferramentas");
 
-        jmiConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Application.png"))); // NOI18N
-        jmiConfig.setText("Definições");
-        jmiConfig.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiConfigActionPerformed(evt);
-            }
-        });
-        jmFerramentas.add(jmiConfig);
-
         jmiBackUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/backup.png"))); // NOI18N
         jmiBackUp.setText("BackUp");
         jmiBackUp.addActionListener(new java.awt.event.ActionListener() {
@@ -304,10 +294,6 @@ public class Principal extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1519, 746));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jmiConfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConfigActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jmiConfigActionPerformed
 
     private void jmiGFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGFActionPerformed
         JIFGerencia Gerencia = new JIFGerencia();
@@ -462,7 +448,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jmFerramentas;
     private javax.swing.JMenu jmFuncionarios;
     private javax.swing.JMenuItem jmiBackUp;
-    private javax.swing.JMenuItem jmiConfig;
     private javax.swing.JMenuItem jmiGF;
     private javax.swing.JMenuItem jmiRestaurar;
     private javax.swing.JPasswordField tf_senha;

@@ -115,6 +115,7 @@ public class AlterarUs extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_salvarActionPerformed
@@ -126,7 +127,7 @@ public class AlterarUs extends javax.swing.JFrame {
         user.setUsuario(tf_Usuario.getText());
         user.setSenha(tf_senha.getText());
 
-        uDAO.Aterar(user);
+        uDAO.Alterar(user);
 
         JOptionPane.showMessageDialog(rootPane, "Alteração de Usuário realizada com Sucesso!");
 
