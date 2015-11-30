@@ -7,6 +7,7 @@ package Telas;
 
 import DAO.UsuarioDAO;
 import Logica.Usuario;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
@@ -28,9 +29,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         jMenuBar1.setEnabled(false);
         jMenuBar1.setVisible(false);
-        
-        
-       
+
     }
 
     /**
@@ -100,8 +99,18 @@ public class Principal extends javax.swing.JFrame {
         jLabel3.setText("Senha:");
 
         tf_usuario.setToolTipText("Informe seu Usuário");
+        tf_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_usuarioKeyReleased(evt);
+            }
+        });
 
         tf_senha.setToolTipText("Informe sua Senha");
+        tf_senha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_senhaKeyReleased(evt);
+            }
+        });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -298,7 +307,7 @@ public class Principal extends javax.swing.JFrame {
     private void jmiGFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiGFActionPerformed
         JIFGerencia Gerencia = new JIFGerencia();
         jdpPrincipal.add(Gerencia);
-         
+
         Gerencia.setVisible(true);
     }//GEN-LAST:event_jmiGFActionPerformed
 
@@ -313,8 +322,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         AlterarUs au = new AlterarUs();
-        au.setVisible(true);         
-       
+        au.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -344,18 +353,30 @@ public class Principal extends javax.swing.JFrame {
 
     private void jmiBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBackUpActionPerformed
         // TODO add your handling code here:
-     JF_Mysql frame = new JF_Mysql();  
-     
-    frame.setVisible(true); 
+        JF_Mysql frame = new JF_Mysql();
+
+        frame.setVisible(true);
     }//GEN-LAST:event_jmiBackUpActionPerformed
 
     private void jmiRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRestaurarActionPerformed
         // TODO add your handling code here:
-        Restaurar restore = new Restaurar();  
-  
-    restore.setVisible(true); 
-    
+        Restaurar restore = new Restaurar();
+
+        restore.setVisible(true);
+
     }//GEN-LAST:event_jmiRestaurarActionPerformed
+
+    private void tf_usuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_usuarioKeyReleased
+        if (evt.getKeyCode() == 10) {
+            Logar();
+        }
+    }//GEN-LAST:event_tf_usuarioKeyReleased
+
+    private void tf_senhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_senhaKeyReleased
+        if (evt.getKeyCode() == 10) {
+            Logar();
+        }
+    }//GEN-LAST:event_tf_senhaKeyReleased
 
     public void Logar() {
         if (tf_usuario.getText().isEmpty() || tf_senha.getText().isEmpty()) {
@@ -386,8 +407,6 @@ public class Principal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -416,16 +435,12 @@ public class Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
-    
-        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
             }
         });
-        
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

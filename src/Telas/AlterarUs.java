@@ -119,6 +119,7 @@ public class AlterarUs extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_salvarActionPerformed
+       
         Usuario user = new Usuario();
         UsuarioDAO uDAO = new UsuarioDAO();
         Util u = new Util();

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="197cbe74-e469-4003-9af8-8795235b1d22">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="0"/>
 	<queryString>
 		<![CDATA[SELECT
      usu.*, fun.*
@@ -36,8 +36,8 @@ FROM
 	<title>
 		<band height="95" splitType="Stretch">
 			<image>
-				<reportElement uuid="a6114164-c5be-4ff5-8488-b7d83c7ba498" x="240" y="0" width="98" height="89"/>
-				<imageExpression><![CDATA["C:\\Users\\Guilherme\\Desktop\\novo brasão lavras da mangabeira.jpg"]]></imageExpression>
+				<reportElement uuid="77c59909-0d79-476d-b465-2c067c8a4204" x="237" y="0" width="87" height="76"/>
+				<imageExpression><![CDATA["C:\\Users\\Guilherme\\Documents\\NetBeansProjects\\SISGAV\\src\\Relatorios\\novo_brasao_lavras_da_mangabeira.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>
