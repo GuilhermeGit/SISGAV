@@ -18,15 +18,19 @@ import util.Util;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import Relatorios.chamar;
-import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import net.sf.jasperreports.view.JasperViewer;
+import util.File;
 
 /**
  *
  * @author Guilherme
  */
 public class JIFGerencia extends javax.swing.JInternalFrame {
+
+    boolean pesquisando;
+    FuncionarioTableModel ftm;
 
     /**
      * Creates new form JIFGerencia
@@ -75,6 +79,8 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
         jCBSec = new javax.swing.JComboBox();
         tf_Funcao = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        tfEmail = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         tfPesquisarNome = new javax.swing.JTextField();
@@ -229,6 +235,15 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
 
         jLabel13.setText("Função:");
 
+        tfEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfEmailActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel16.setText("Email:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -261,7 +276,11 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFContato, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jFContato, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lbl_matri))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,18 +309,15 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tfRG, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tfSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel10)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfSexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfRG, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                        .addGap(85, 85, 85)
+                        .addComponent(jLabel10)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -345,9 +361,13 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jFContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel16)
+                                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(jFContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
 
@@ -502,8 +522,6 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
                     .addComponent(scan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        scan.getAccessibleContext().setAccessibleDescription("Escanear documento");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Localização Física"));
 
@@ -673,7 +691,14 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tbAlterarMouseClicked
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        // TODO add your handling code here:
+        if (pesquisando) {
+            if (!Util.chkVazio(tfNome.getText(), tfCidade.getText(), tf_matri.getText(),
+                    jFnascimento.getText(),
+                    jFCPF.getText(), tfRG.getText(), jFContato.getText(), jFAdm.getText(), tf_Funcao.getText(), jFexo.getText(), tfprate.getText(), tfcaixa.
+                    getText(), tfenve.getText())) {
+                return;
+            }
+        }
         Util u = new Util();
         Util.CPF(jFCPF.getText());
         String valor;
@@ -690,7 +715,13 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
                     if (u.dataValida(jFAdm.getText())) {
                         if (u.dataValida(jFexo.getText())) {
 
-                            Funcionario fun = new Funcionario();
+                            Funcionario fun;
+                            if (tbAlterar.getSelectedRow() > 0) {
+                                fun = (Funcionario) ftm.getSelected(tbAlterar.getSelectedRow());
+                            } else {
+                                fun = new Funcionario();
+                            }
+
                             fun.setNome(tfNome.getText());
                             fun.setCpf(jFCPF.getText());
                             fun.setCidade(tfCidade.getText());
@@ -710,10 +741,25 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
                             fun.setEnvelope(tfenve.getText());
 
                             funcionarioDAO dao = new funcionarioDAO();
-                            dao.salvar(fun);
-                            limpaCampos();
+                            if (tbAlterar.getSelectedRow() > 0) {
+                                dao.Alterar(fun);
+                            } else {
+                                dao.salvar(fun);
+                            }
 
-                            JOptionPane.showMessageDialog(rootPane, "Cadastro de Funcionário realizado com Sucesso!");
+                            File file = new File(fun.getNome());
+                            try {
+                                file.createDirectory();
+                            } catch (IOException ex) {
+                                Logger.getLogger(JIFGerencia.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+
+                            limpaCampos();
+                            if (tbAlterar.getSelectedRow() > 0) {
+                                JOptionPane.showMessageDialog(rootPane, "Alteraço de Funcionário realizada com Sucesso!");
+                            } else {
+                                JOptionPane.showMessageDialog(rootPane, "Cadastro de Funcionário realizado com Sucesso!");
+                            }
                             List<Funcionario> funcionarios = dao.pesquisaNomeiLike("");
                             FuncionarioTableModel ftm = new FuncionarioTableModel(funcionarios);
                             tbAlterar.setModel(ftm);
@@ -779,13 +825,13 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
 
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
         // TODO add your handling code here:
-
+        pesquisando = true;
         funcionarioDAO fDAO = new funcionarioDAO();
         //Texto digitado para pesquisa
         List<Funcionario> func = new ArrayList<>();
         List<Funcionario> funcionarios = fDAO.pesquisaNomeiLike(tfPesquisarNome.getText());
         if (Util.chkSize(funcionarios, tfPesquisarNome.getText())) {
-            FuncionarioTableModel ftm = new FuncionarioTableModel(funcionarios);
+            ftm = new FuncionarioTableModel(funcionarios);
             tbAlterar.setModel(ftm);
         }
     }//GEN-LAST:event_btPesquisarActionPerformed
@@ -878,6 +924,10 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_scanActionPerformed
 
+    private void tfEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfEmailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAlterar;
@@ -899,6 +949,7 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -919,6 +970,7 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
     private javax.swing.JButton scan;
     private javax.swing.JTable tbAlterar;
     private javax.swing.JTextField tfCidade;
+    private javax.swing.JTextField tfEmail;
     private javax.swing.JComboBox tfEstado;
     private javax.swing.JTextField tfId;
     private javax.swing.JTextField tfNome;

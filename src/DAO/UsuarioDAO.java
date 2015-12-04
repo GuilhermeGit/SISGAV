@@ -111,4 +111,13 @@ public class UsuarioDAO {
 
     }
 
+    public Usuario recuperarDados(String email) {
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        Transaction transacao = sessao.beginTransaction();
+        Usuario usuarioEncontrado = (Usuario) sessao.createCriteria(Usuario.class)
+                .add(Restrictions.ilike("email", email)).uniqueResult();
+        sessao.close();
+        return usuarioEncontrado;
+    }
+
 }

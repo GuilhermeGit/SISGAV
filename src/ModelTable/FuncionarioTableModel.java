@@ -27,7 +27,7 @@ public class FuncionarioTableModel extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
-        return funcionarios.size();
+        return getFuncionarios().size();
     }
 
     @Override
@@ -81,7 +81,7 @@ public class FuncionarioTableModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Funcionario funcionario = funcionarios.get(rowIndex);
+        Funcionario funcionario = getFuncionarios().get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return funcionario.getId();
@@ -125,5 +125,25 @@ public class FuncionarioTableModel extends AbstractTableModel {
         }
         return null;
     }
+
+    public Funcionario getSelected(int row) {
+        return funcionarios.get(row);
+    }
+    
+    /**
+     * @return the funcionarios
+     */
+    public List<Funcionario> getFuncionarios() {
+        return funcionarios;
+    }
+
+    /**
+     * @param funcionarios the funcionarios to set
+     */
+    public void setFuncionarios(List<Funcionario> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+    
+    
 
 }

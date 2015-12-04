@@ -29,6 +29,8 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         jMenuBar1.setEnabled(false);
         jMenuBar1.setVisible(false);
+        tf_usuario.setFocusable(true);
+        tf_usuario.requestFocusInWindow();
 
     }
 
@@ -321,7 +323,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        AlterarUs au = new AlterarUs();
+        AlterarUs au = new AlterarUs(login);
         au.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed

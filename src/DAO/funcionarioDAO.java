@@ -72,7 +72,7 @@ public class funcionarioDAO {
     public void Alterar(Funcionario funcionario) {
         sessao = HibernateUtil.getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        sessao.saveOrUpdate(funcionario);
+        sessao.update(funcionario);
         transacao.commit();
         sessao.close();
     }
