@@ -50,7 +50,8 @@ public class AlterarUs extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Alterar Usuário");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("Usuario:");
@@ -150,19 +151,20 @@ public class AlterarUs extends javax.swing.JFrame {
         Usuario user = new Usuario();
         UsuarioDAO uDAO = new UsuarioDAO();
         Util u = new Util();
-        if (Util.chkVazio(tf_Usuario.getText(), tf_senha.getText()));
+        if (Util.chkVazio(tf_Usuario.getText(), tf_senha.getText())) {
 
-        this.usr.setUsuario(tf_Usuario.getText());
-        this.usr.setSenha(tf_senha.getText());
-        this.usr.setEmail(tfEmail.getText());
-        uDAO.Alterar(this.usr);
+            this.usr.setUsuario(tf_Usuario.getText());
+            this.usr.setSenha(tf_senha.getText());
+            this.usr.setEmail(tfEmail.getText());
+            uDAO.Alterar(this.usr);
 
-        JOptionPane.showMessageDialog(rootPane, "Alteração de Usuário realizada com Sucesso!");
+            JOptionPane.showMessageDialog(rootPane, "Alteração de Usuário realizada com Sucesso!");
 
-        UsuarioDAO udao = new UsuarioDAO();
-        List<Usuario> usuarios = udao.pesquisaUsuarioiLike("");
-        UsuarioTableModel utm = new UsuarioTableModel(usuarios);
-        dispose();
+            UsuarioDAO udao = new UsuarioDAO();
+            List<Usuario> usuarios = udao.pesquisaUsuarioiLike("");
+            UsuarioTableModel utm = new UsuarioTableModel(usuarios);
+            dispose();
+        }
 
         //        bt_salvar.setModel((ButtonModel) utm);
     }//GEN-LAST:event_bt_salvarActionPerformed

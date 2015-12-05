@@ -64,7 +64,7 @@ import eu.gnome.morena.TransferListener;
 public class MorenaStudio extends JApplet {
     
     public MorenaStudio() {
-        
+       
     }
 
     static private Manager manager;
@@ -435,7 +435,7 @@ public class MorenaStudio extends JApplet {
         // -- Manager instantiation    
         manager = Manager.getInstance();
         JFrame frame = new JFrame("Digitalizar documentos");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
