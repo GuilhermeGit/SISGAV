@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
  * @author Guilherme
  */
 public class JF_Mysql extends javax.swing.JFrame {
+
     Connection con = null;
     Process proc;
-    
 
     /**
      * Creates new form JF_Mysql
@@ -27,12 +27,12 @@ public class JF_Mysql extends javax.swing.JFrame {
         initComponents();
         try {
             con = Conexao.conectar();
-            JFC_Salvar_Backup.setVisible(false);
+         //   JFC_Salvar_Backup.setVisible(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Erro", 2);
         }
-        setLocationRelativeTo(null); 
-       
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -96,52 +96,12 @@ public class JF_Mysql extends javax.swing.JFrame {
     }//GEN-LAST:event_JFC_Salvar_BackupActionPerformed
 
     private void JB_BackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JB_BackupActionPerformed
-        //Botão Backup
-       try {
-String arquivo = null;
+       
 
-JFC_Salvar_Backup.setVisible(true);                        
-
-int result = JFC_Salvar_Backup.showSaveDialog(null);
-
-if(result == JFileChooser.APPROVE_OPTION){
-arquivo = JFC_Salvar_Backup.getSelectedFile().toString().concat(".sql");
-
-File file = new File(arquivo); 
-
-if(file.exists()){
-   Object[] options = { "Sim", "Não" };
-        int opcao = JOptionPane.showOptionDialog(null,"Um arquivo com este nome já existe. Deseja alterar o arquivo?", "Atenção!!!",
-        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,options, options[0]);
-            if (opcao == JOptionPane.YES_OPTION) {                
-                Runtime bck = Runtime.getRuntime();   
-                bck.exec("C:/wamp/bin/mysql/mysql5.6.17/bin/mysqldump.exe -v -v -v --host=localhost --user=root "
-                        + "--password= --port=3306 --protocol=tcp --force --allow-keywords "
-                        + "--compress  --add-drop-table --default-character-set=latin1 --hex-blob  "
-                        + "--result-file="+arquivo+" --databases sisgam");  
-                JOptionPane.showMessageDialog(null, "Backup realizado com sucesso.", "", 1);
-            }else{
-                JB_BackupActionPerformed(evt);
-            }
-}else{
-
-            Runtime bck = Runtime.getRuntime();   
-            bck.exec("C:/wamp/bin/mysql/mysql5.6.17/bin/mysqldump.exe -v -v -v --host=localhost --user=root "
-                    + "--password= --port=3306 --protocol=tcp --force --allow-keywords "
-                    + "--compress  --add-drop-table --default-character-set=latin1 --hex-blob  "
-                    + "--result-file="+arquivo+" --databases sisgam");  
-            JOptionPane.showMessageDialog(null, "Backup realizado com sucesso.", "", 1);   
-}
-
-}
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Erro!", 2);
-        }
+        
 
     }//GEN-LAST:event_JB_BackupActionPerformed
 
-        
     /**
      * @param args the command line arguments
      */

@@ -6,13 +6,15 @@
 package Telas;
 
 import DAO.UsuarioDAO;
+import File.FileLog;
 import Logica.Usuario;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.WindowConstants;
-import restaurar_backup.Restaurar;
+import restaurar_backup.Conexao;
 
 /**
  *
@@ -353,7 +355,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void bt_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_sairActionPerformed
         int i = JOptionPane.showConfirmDialog(
-                null, "Deseja sair do SISGAM?", "Mensagem", JOptionPane.WARNING_MESSAGE);
+                null, "Deseja sair do SISGAV?", "Mensagem", JOptionPane.WARNING_MESSAGE);
         if (i == JOptionPane.YES_OPTION) {
             dispose();
 
@@ -365,17 +367,92 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1FocusGained
 
     private void jmiBackUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBackUpActionPerformed
-        // TODO add your handling code here:
-        JF_Mysql frame = new JF_Mysql();
+        //Botão Backup
+        try {
+            String arquivo = null;
 
-        frame.setVisible(true);
+            JFileChooser jf = new JFileChooser();
+            jf.setVisible(true);
+
+            int result = jf.showSaveDialog(null);
+
+            if (result == JFileChooser.APPROVE_OPTION) {
+                arquivo = jf.getSelectedFile().toString().concat(".sql");
+
+                File file = new File(arquivo);
+
+                if (file.exists()) {
+                    Object[] options = {"Sim", "Não"};
+                    int opcao = JOptionPane.showOptionDialog(null, "Um arquivo com este nome já existe. Deseja alterar o arquivo?", "Atenção!!!",
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                    if (opcao == JOptionPane.YES_OPTION) {
+                        Runtime bck = Runtime.getRuntime();
+                        bck.exec("C:/wamp/bin/mysql/mysql5.6.17/bin/mysqldump.exe -v -v -v --host=localhost --user=root "
+                                + "--password= --port=3306 --protocol=tcp --force --allow-keywords "
+                                + "--compress  --add-drop-table --default-character-set=latin1 --hex-blob  "
+                                + "--result-file=" + arquivo + " --databases sisgam");
+                        JOptionPane.showMessageDialog(null, "Backup realizado com sucesso.", "", 1);
+                    }
+                } else {
+                    Runtime bck = Runtime.getRuntime();
+                    bck.exec("C:/wamp/bin/mysql/mysql5.6.17/bin/mysqldump.exe -v -v -v --host=localhost --user=root "
+                            + "--password= --port=3306 --protocol=tcp --force --allow-keywords "
+                            + "--compress  --add-drop-table --default-character-set=latin1 --hex-blob  "
+                            + "--result-file=" + arquivo + " --databases sisgam");
+                    JOptionPane.showMessageDialog(null, "Backup realizado com sucesso.", "", 1);
+                }
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "Erro!", 2);
+        }
     }//GEN-LAST:event_jmiBackUpActionPerformed
 
     private void jmiRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRestaurarActionPerformed
-        // TODO add your handling code here:
-        Restaurar restore = new Restaurar();
+        Process proc;
+        try {
+            JFileChooser jf = new JFileChooser();
 
-        restore.setVisible(true);
+            jf.setVisible(true);
+            int result = jf.showOpenDialog(null);
+
+            if (result == JFileChooser.OPEN_DIALOG) {
+
+                File bkp;
+                FileLog fl = new FileLog(jf.getSelectedFile().toString());
+
+                Connection cnx = Conexao.conectar();
+               
+                PreparedStatement ps = null;
+                String strTemp = null;
+                String strTemp2 = null;
+                StringBuilder sb = new StringBuilder("");
+                for (String str : fl.readFile()) {
+                    if (!str.startsWith("-") && !str.startsWith("/*") && !str.startsWith("USE")) {
+                      sb.append(str);
+                    }
+                   
+                    if (strTemp != null) {
+                        strTemp2 = str;
+                    }
+     
+                    sb.append(str.concat(" "));
+                }
+
+                ps = cnx.prepareStatement(sb.toString());
+                System.out.println("QUERY INSERT \n" + sb.toString());
+                ps.execute();
+
+                //if (exitVal == 0) {
+                JOptionPane.showMessageDialog(null, "Backup Restaurado com sucesso !");
+                //  } else {
+              //  JOptionPane.showMessageDialog(null, "Falha ao restaurar backup. \n Verifique as configurações ou entre em contato com o suporte !");
+                //  }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "Erro!", 2);
+        }
 
     }//GEN-LAST:event_jmiRestaurarActionPerformed
 
@@ -394,7 +471,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Recuperar rec = new Recuperar();
         rec.setVisible(true);
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void Logar() {
@@ -409,17 +486,22 @@ public class Principal extends javax.swing.JFrame {
             usuario.setId(login.getId());
 
         }
-        Usuario usua = dao.pesquisaUsuario(tf_usuario.getText(), tf_senha.getText());
-        if (usua != null) {
-            jMenuBar1.setEnabled(true);
-            jMenuBar1.setVisible(true);
-            jPanel1.setVisible(false);
-            this.login = usua;
-            //  dispose();
-            //   new Principal().setVisible(true);
+        List<Usuario> usr = dao.list();
+        if (usr.size() > 0) {
+            Usuario usua = dao.pesquisaUsuario(tf_usuario.getText(), tf_senha.getText());
+            if (usua != null) {
+                jMenuBar1.setEnabled(true);
+                jMenuBar1.setVisible(true);
+                jPanel1.setVisible(false);
+                this.login = usua;
+                //  dispose();
+                //   new Principal().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Usuário Inválido!!!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Usuário Inválido!!!", "Erro", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Nenhum usuario foi encontrado.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 

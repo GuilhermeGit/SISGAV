@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package restaurar_backup;
 
 import java.sql.Connection;
@@ -15,17 +14,23 @@ import java.sql.SQLException;
  */
 public class Conexao {
 
-    static Connection con=null;
+    static Connection con = null;
+    static final String HOST = "localhost";
+    static final String PORT = "3306";
+    static final String DATABASE = "sisgam";
+    static final String USER = "root";
+    static final String PASS = "";
 
- public static Connection conectar(){
-    try {
+    public static Connection conectar() {
+        try {
 
-        con = DriverManager.getConnection("jdbc:mysql://localhost/livro_veja","root","igc7gng");
-    }
-    catch (SQLException e) {
-        System.out.println(e.getMessage());
-    }
-    return con;
+            con = DriverManager.getConnection("jdbc:mysql://".concat(HOST).concat("/").concat(DATABASE), 
+                    USER, PASS);
+        } catch (SQLException e) {
+            System.out.println("erro aqui");
+            System.out.println(e.getMessage());
+        }
+        return con;
     }
 
 }

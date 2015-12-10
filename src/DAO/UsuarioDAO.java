@@ -39,6 +39,14 @@ public class UsuarioDAO {
         transacao.commit();
         sessao.close();
     }
+    
+    public List<Usuario> list() {
+        sessao = HibernateUtil.getSessionFactory().openSession();
+        transacao = sessao.beginTransaction();
+        List<Usuario> usuarios = (List<Usuario>) sessao.createCriteria(Usuario.class).list();
+        sessao.close();
+        return usuarios;
+    }
 
     public Usuario pesquisaID(int id) {
         sessao = HibernateUtil.getSessionFactory().openSession();
