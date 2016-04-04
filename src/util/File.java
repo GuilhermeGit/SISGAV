@@ -59,7 +59,7 @@ public class File {
      */
     public void createDirectory() throws IOException {
         if (Files.exists(path)) {
-            path = Paths.get(path.toString().concat("/").concat(fileName));
+            path = Paths.get(path.toString().concat("\\").concat(fileName));
             if (System.getProperty("os.name").equalsIgnoreCase("Windows")) {
                 Files.setAttribute(path, "dos:hidden", true);
             }

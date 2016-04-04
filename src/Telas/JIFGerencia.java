@@ -753,9 +753,11 @@ public class JIFGerencia extends javax.swing.JInternalFrame {
                             } else {
                                 JOptionPane.showMessageDialog(rootPane, "Cadastro de Funcionário realizado com Sucesso!");
                             }
-                            List<Funcionario> funcionarios = dao.pesquisaNomeiLike("");
-                            FuncionarioTableModel ftm = new FuncionarioTableModel(funcionarios);
-                            tbAlterar.setModel(ftm);
+                            if (tbAlterar.getSelectedRow() > 0) {
+                                List<Funcionario> funcionarios = dao.pesquisaNomeiLike("");
+                                FuncionarioTableModel ftm = new FuncionarioTableModel(funcionarios);
+                                tbAlterar.setModel(ftm);
+                            }
                         }
                     }
                 }

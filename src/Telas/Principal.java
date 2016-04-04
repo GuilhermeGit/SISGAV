@@ -435,7 +435,7 @@ public class Principal extends javax.swing.JFrame {
                     if (strTemp != null) {
                         strTemp2 = str;
                     }
-     
+      
                     sb.append(str.concat(" "));
                 }
 
