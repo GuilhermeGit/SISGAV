@@ -61,7 +61,7 @@ public class AlterarUs extends javax.swing.JFrame {
 
         bt_salvar.setBackground(new java.awt.Color(0, 255, 204));
         bt_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Save.png"))); // NOI18N
-        bt_salvar.setText("Salvar/Relogar");
+        bt_salvar.setText("Salvar");
         bt_salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_salvarActionPerformed(evt);
@@ -159,6 +159,7 @@ public class AlterarUs extends javax.swing.JFrame {
             uDAO.Alterar(this.usr);
 
             JOptionPane.showMessageDialog(rootPane, "Alteração de Usuário realizada com Sucesso!");
+            JOptionPane.showMessageDialog(rootPane,"Reinicie o SISGAV para aplicar as alterações!");
 
             UsuarioDAO udao = new UsuarioDAO();
             List<Usuario> usuarios = udao.pesquisaUsuarioiLike("");

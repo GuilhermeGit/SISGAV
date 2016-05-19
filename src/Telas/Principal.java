@@ -8,6 +8,7 @@ package Telas;
 import DAO.UsuarioDAO;
 import File.FileLog;
 import Logica.Usuario;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,6 +24,11 @@ import restaurar_backup.Conexao;
 public class Principal extends javax.swing.JFrame {
 
     private Usuario login;
+    private final String CAMINHO1 = "C:/wamp/bin/mysql/mysql5.6.17/bin/",
+            CAMINHO2 = "C:\\wamp\\bin\\mysql\\mysql5.6.17\\bin\\",
+            BANCO = "sisgam",
+            USUARIO = "root",
+            SENHA = "";
 
     /**
      * Creates new form Tela_de_Menus
@@ -387,7 +393,7 @@ public class Principal extends javax.swing.JFrame {
                             JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                     if (opcao == JOptionPane.YES_OPTION) {
                         Runtime bck = Runtime.getRuntime();
-                        bck.exec("C:/wamp/bin/mysql/mysql5.6.17/bin/mysqldump.exe -v -v -v --host=localhost --user=root "
+                        bck.exec(CAMINHO1+"mysqldump.exe -v -v -v --host=localhost --user=root "
                                 + "--password= --port=3306 --protocol=tcp --force --allow-keywords "
                                 + "--compress  --add-drop-table --default-character-set=latin1 --hex-blob  "
                                 + "--result-file=" + arquivo + " --databases sisgam");
@@ -395,7 +401,7 @@ public class Principal extends javax.swing.JFrame {
                     }
                 } else {
                     Runtime bck = Runtime.getRuntime();
-                    bck.exec("C:/wamp/bin/mysql/mysql5.6.17/bin/mysqldump.exe -v -v -v --host=localhost --user=root "
+                    bck.exec(CAMINHO1+"mysqldump.exe -v -v -v --host=localhost --user=root "
                             + "--password= --port=3306 --protocol=tcp --force --allow-keywords "
                             + "--compress  --add-drop-table --default-character-set=latin1 --hex-blob  "
                             + "--result-file=" + arquivo + " --databases sisgam");
@@ -421,33 +427,27 @@ public class Principal extends javax.swing.JFrame {
                 File bkp;
                 FileLog fl = new FileLog(jf.getSelectedFile().toString());
 
-                Connection cnx = Conexao.conectar();
-               
-                PreparedStatement ps = null;
-                String strTemp = null;
-                String strTemp2 = null;
-                StringBuilder sb = new StringBuilder("");
-                for (String str : fl.readFile()) {
-                    if (!str.startsWith("-") && !str.startsWith("/*") && !str.startsWith("USE")) {
-                      sb.append(str);
-                    }
-                   
-                    if (strTemp != null) {
-                        strTemp2 = str;
-                    }
-      
-                    sb.append(str.concat(" "));
+               byte[] bytes = new byte[4096];
+                String dirMysql = CAMINHO2;
+                ProcessBuilder pb = new ProcessBuilder(
+                        dirMysql + "mysql", "-u", USUARIO, BANCO);
+                pb.redirectInput(ProcessBuilder.Redirect.from(new File(jf.getSelectedFile().toString())));
+                Process process = pb.start();
+                BufferedInputStream in = new BufferedInputStream(process.getErrorStream());
+                StringBuffer retorno = new StringBuffer("");
+                while (in.read(bytes) != -1) {
+                    retorno.append(new String(bytes));
+                }
+                int exitVal = process.waitFor();
+                if (!retorno.toString().equals("")) {
+                    throw new Exception("Erro no comando: " + retorno);
                 }
 
-                ps = cnx.prepareStatement(sb.toString());
-                System.out.println("QUERY INSERT \n" + sb.toString());
-                ps.execute();
-
-                //if (exitVal == 0) {
-                JOptionPane.showMessageDialog(null, "Backup Restaurado com sucesso !");
-                //  } else {
-              //  JOptionPane.showMessageDialog(null, "Falha ao restaurar backup. \n Verifique as configurações ou entre em contato com o suporte !");
-                //  }
+                if (exitVal == 0) {
+                    JOptionPane.showMessageDialog(null, "Backup Restaurado com sucesso !");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Falha ao restaurar backup. \n Verifique as configurações ou entre em contato com o suporte !");
+                }
             }
 
         } catch (Exception e) {
@@ -530,6 +530,10 @@ public class Principal extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

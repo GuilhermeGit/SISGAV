@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="197cbe74-e469-4003-9af8-8795235b1d22">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="2"/>
 	<queryString>
 		<![CDATA[SELECT
      usu.*, fun.*
@@ -65,12 +65,15 @@ CNPJ: 07.609.621/0001-16
 	<columnHeader>
 		<band height="189" splitType="Stretch">
 			<textField>
-				<reportElement uuid="25b73bf5-b23f-4904-a6ec-2249fa73297e" x="0" y="0" width="555" height="176"/>
+				<reportElement uuid="25b73bf5-b23f-4904-a6ec-2249fa73297e" x="0" y="0" width="555" height="189"/>
 				<textElement textAlignment="Justified">
 					<font fontName="Arial" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Declaramos para fazer prova junto ao Instituto Nacional do Seguro Social - INSS, que, a Sr(a)"  +  $F{nome}  + " foi Funcionário (a) desta Prefeitura Municipal de Lavras da Mangabeira-CE nos períodos de " + $F{admissao}+ " à " + $F{exoneracao} + " onde o (a) mesmo (a) exerceu a função de "+ $F{Funcao} +  " junto a Secretaria de "+ $F{secretaria} + " deste município de Lavras da Mangabeira-CE." +
-"Declaramos ainda, que, a mesma foi regida pela Consolidação das Leis Trabalhistas – CLT, desde sua admissão até 27.02.1992 e a partir de 28.02.1992, passou a ser regida pelo Regime Jurídico Único – RJU (estatutário) conforme a lei n° 005/92 de 28.02.1992 e publicada no Diário Oficial em 16.09.1992, permanecendo desta forma até sua exoneração." + " Declaramos finalmente, que, este Município nunca possuiu e nem possui regime próprio de previdência, estando assim subordinado ao Regime Geral da Previdência Social – RGPS. Pelo que firmamos a presente declaração para fins necessários."]]></textFieldExpression>
+				<textFieldExpression><![CDATA[	"Declaramos para fazer prova junto ao Instituto Nacional do Seguro Social - INSS, que, a Sr(a)"  +  $F{nome}  + " foi Funcionário (a) desta Prefeitura Municipal de Lavras da Mangabeira-CE nos períodos de " + $F{admissao}+ " à " + $F{exoneracao} + " onde o (a) mesmo (a) exerceu a função de "+ $F{Funcao} +  " junto a Secretaria de "+ $F{secretaria} + " deste município de Lavras da Mangabeira-CE." +
+
+	"Declaramos ainda, que, a mesma foi regida pela Consolidação das Leis Trabalhistas – CLT, desde sua admissão até 27.02.1992 e a partir de 28.02.1992, passou a ser regida pelo Regime Jurídico Único – RJU (estatutário) conforme a lei n° 005/92 de 28.02.1992 e publicada no Diário Oficial em 16.09.1992, permanecendo desta forma até sua exoneração." + 
+
+             " Declaramos finalmente, que, este Município nunca possuiu e nem possui regime próprio de previdência, estando assim subordinado ao Regime Geral da Previdência Social – RGPS. Pelo que firmamos a presente declaração para fins necessários."]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>

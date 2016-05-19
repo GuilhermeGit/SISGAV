@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 
 /**
  *
- * @author Roberto Nunes
+ * @author Guilherme
  */
 public class StreamGobbler {
 
